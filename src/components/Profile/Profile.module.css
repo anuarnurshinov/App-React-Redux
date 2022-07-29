@@ -2,7 +2,7 @@
     grid-area: c;
     background-color: purple;
     }
-    .content img{
+    .contentImg{
       object-fit: cover;
       width:80vw;
       height:40vh;
