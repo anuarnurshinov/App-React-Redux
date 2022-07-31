@@ -1,12 +1,4 @@
-.content{
-    grid-area: c;
-    background-color: purple;
-    }
-    .contentImg{
-      object-fit: cover;
-      width:80vw;
-      height:40vh;
-    }
-    .item {
-        color: greenyellow
-    }
+
+.item {
+  color: greenyellow;
+}
