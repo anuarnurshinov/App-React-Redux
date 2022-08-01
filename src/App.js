@@ -7,13 +7,18 @@ import Settings from './components/Settings/Settings'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 
-const App = () => {
+
+
+const App = (props) => {
   return (
     <BrowserRouter >
       <Routes class='app-wrapper-content'>
         <Route path='/' element={<Layout />}>
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/dialogs/*' element={<Dialogs />} />
+          <Route path='/profile' element={<Profile
+            state={props.state.profilePage}
+            addPost={props.addPost} />} />
+          <Route path='/dialogs/*' element={<Dialogs
+            state={props.state.dialogsPage} />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />

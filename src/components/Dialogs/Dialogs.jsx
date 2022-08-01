@@ -5,48 +5,19 @@ import Message from './Message/Message'
 
 const Dialogs = (props) => {
 
-    let dialogsData = [
-        {
-            id: '1',
-            name: 'Dima'
-        },
-        {
-            id: '2',
-            name: 'Anuar'
-        },
-        {
-            id: '3',
-            name: 'Vasya'
-        },
-        {
-            id: '4',
-            name: 'Anya'
-        },
-    ]
-    let messagesData = [
-        {
-            id: '1',
-            message: 'Hello'
-        },
-        {
-            id: '2',
-            message: 'GoodBy'
-        },
-        {
-            id: '3',
-            message: "What's up?"
-        },
-        {
-            id: '4',
-            message: 'Where are u?'
-        },
-    ]
-    let messagesElements = messagesData.map(message => {
-        return <Message message={message.message} />
-    })
-    let dialogsElements = dialogsData.map(dialog => {
+    let dialogsElements = props.state.dialogs.map(dialog => {
         return <Dialog name={dialog.name} path={dialog.id} />
     })
+    let messagesElements = props.state.messages.map(message => {
+        return <Message message={message.message} />
+    })
+    let newMessageElement = React.createRef()
+
+    let addNewMessage = () => {
+        let text = newMessageElement.current.value
+        console.log(text);
+    }
+
 
     return (
         <div className={Classes.dialogs}>
@@ -55,6 +26,15 @@ const Dialogs = (props) => {
             </div>
             <div className={Classes.messages}>
                 {messagesElements}
+                <div>
+                    <textarea ref={newMessageElement}>
+
+                    </textarea>
+                </div>
+                <div>
+                    <button onClick={addNewMessage}> Добавить сообщение </button>
+                    <button> Удалить сообщение </button>
+                </div>
             </div>
         </div>
     );

@@ -1,4 +1,6 @@
-
+.profileBlock{
+  text-decoration: none;
+}
 .item {
   color: greenyellow;
 }

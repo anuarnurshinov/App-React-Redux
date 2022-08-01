@@ -1,0 +1,6 @@
+.friendListContainer{
+    grid-template-columns: repeat(3, 1fr);
+  margin: 40px auto;
+  grid-gap: 10px;
+  display: grid;
+}
