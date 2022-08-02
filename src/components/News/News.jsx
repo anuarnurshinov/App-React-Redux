@@ -4,7 +4,7 @@ import Classes from "./News.module.css";
 const News = (props) => {
     return (
         <div>
-            <div> News </div>
+            <div> <button>News</button> </div>
         </div>
     );
 };
