@@ -67,7 +67,6 @@ let store = {
         },
     },
     callSubscriber() {
-        console.log('Changes');
     },
     addPost() {
         let newPost = {
