@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 let callSubscriber = (props) => {
     root.render(
         <React.StrictMode>
-            <App state={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} />
+            <App dispatch={store.dispatch.bind(store)} state={store.getState()} />
         </React.StrictMode>
     );
 }
