@@ -1,24 +1,22 @@
 import React from 'react';
 import Classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import { updateNewPostTextActionCreator } from '../../../redux/store';
-import { addPostActionCreator } from './../../../redux/store';
+
 
 
 
 const MyPosts = (props) => {
-    let postsElements = props.state.map((post) => {
+    let postsElements = props.posts.map((post) => {
         return <Post message={post.message} likeCounts={post.likesCount} />
     })
     let newPostElement = React.createRef()
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        props.addPost()
     }
     let onPostChange = () => {
         let text = newPostElement.current.value
-        let action = updateNewPostTextActionCreator(text)
-        props.dispatch(action)
+        props.updateNewPostText(text)
     }
 
     return (
@@ -27,10 +25,10 @@ const MyPosts = (props) => {
                 <textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange} />
             </div>
             <div>
-                <button onClick={addPost}>
+                <button onClick={onAddPost}>
                     Оставить запись
                 </button>
-                <button onClick={addPost}>
+                <button onClick={onAddPost}>
                     Удалить запись
                 </button>
             </div>
@@ -41,5 +39,6 @@ const MyPosts = (props) => {
         </div>
     )
 }
+
 
 export default MyPosts;
