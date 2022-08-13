@@ -7,10 +7,10 @@ import Message from './Message/Message'
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogsPage.dialogs.map(dialog => {
-        return <Dialog name={dialog.name} path={dialog.id} />
+        return <Dialog name={dialog.name} key={dialog.id} path={dialog.id} />
     })
     let messagesElements = props.dialogsPage.messages.map(message => {
-        return <Message message={message.message} />
+        return <Message message={message.message} key={message.id} />
     })
     let newMessageBody = props.dialogsPage.newMessageBody
     let newMessageElement = React.createRef()
