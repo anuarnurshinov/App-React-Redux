@@ -1,0 +1,16 @@
+.avatar {
+  width: auto;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.selectedPage {
+  font-weight: bold;
+  color: gold;
+}
+.page:hover{
+  cursor: pointer;
+}
+.selectedPage:hover{
+  cursor: pointer;
+}
