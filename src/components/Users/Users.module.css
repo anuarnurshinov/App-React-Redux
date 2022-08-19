@@ -7,10 +7,36 @@
 .selectedPage {
   font-weight: bold;
   color: gold;
+  list-style-type: none;
+  display: inline;
 }
-.page:hover{
+.currentPage:hover{
   cursor: pointer;
 }
 .selectedPage:hover{
   cursor: pointer;
+}
+.currentPage{
+  display: inline-block;
+  list-style-type: none;
+  margin: 2px;
+}
+.galleryContainer{
+  margin: 20px;
+  width: 200px;
+  height: 20px;
+  overflow: hidden;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+}
+.gallery{
+  overflow: auto;
+  display: inline-block;
+}
+
+
+.pageListBlock {
+  display: flex;
+  height: 40px;
+  margin: 10px;
 }

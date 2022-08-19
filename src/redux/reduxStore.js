@@ -15,5 +15,5 @@ export let store = configureStore({
 });
 
 
-
+window.store = store
 
