@@ -3,8 +3,10 @@ import Classes from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
 import Preloader from "../Common/Preloader/Preloader"
 import { NavLink } from 'react-router-dom';
+import * as axios from 'axios'
 
 const Users = (props) => {
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pagesArray = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -41,8 +43,10 @@ const Users = (props) => {
                     <span >
                         <div>
                             {user.followed ?
-                                <button onClick={() => { props.unfollow(user.id) }}> Unfollow </button> :
-                                <button onClick={() => { props.follow(user.id) }}> Follow </button>}
+                                <button
+                                    onClick={() => { props.onClickSendUnfollowToServer(user.id) }}> Unfollow </button> :
+                                <button
+                                    onClick={() => { props.onClickSendFollowToServer(user.id) }}> Follow </button>}
                         </div>
                     </span>
                     <span>

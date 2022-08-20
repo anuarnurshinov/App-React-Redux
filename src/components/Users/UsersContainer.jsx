@@ -1,28 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux/es/exports';
 import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, moveGalleryRight, moveGalleryLeft, toggleIsFetching } from './../../redux/usersReducer';
-import * as axios from "axios";
 import Users from "./Users";
+import { usersAPI } from './../../api/api';
 
 
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`)
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount)
             });
     }
     onPageChanged = (pageNumber) => {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pagesSize}`)
-            .then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             });
     }
     onClickGalleryRight = () => {
@@ -31,22 +31,33 @@ class UsersContainer extends React.Component {
     onClickGalleryLeft = () => {
         this.props.moveGalleryLeft()
     }
+    onClickSendFollowToServer = (userId) => {
+        usersAPI.postFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    this.props.follow(userId)
+                }
+            });
+    }
+    onClickSendUnfollowToServer = (userId) => {
+        usersAPI.deleteFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    this.props.unfollow(userId)
+                }
+            });
+    }
 
 
     render() {
         return <>
             <Users
-                isFetching={this.props.isFetching}
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
+                onClickSendUnfollowToServer={this.onClickSendUnfollowToServer}
+                onClickSendFollowToServer={this.onClickSendFollowToServer}
                 onClickGalleryLeft={this.onClickGalleryLeft}
-                galleryPosition={this.props.galleryPosition}
-                currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 onClickGalleryRight={this.onClickGalleryRight}
-                unfollow={this.props.unfollow}
-                follow={this.props.follow}
-                users={this.props.users}
+                {...this.props}
             />
         </>
     }

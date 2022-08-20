@@ -16,6 +16,7 @@ const App = (props) => {
     <BrowserRouter >
       <Routes class='app-wrapper-content'>
         <Route path='/' element={<Layout />}>
+          <Route path='/*'></Route>
           <Route path='/profile/:id' element={<ProfileContainer />} />
           <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />
