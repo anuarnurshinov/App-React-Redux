@@ -22,9 +22,10 @@ const ProfileInfo = (props) => {
     return (
         <div>
             {/* <div><img className={Classes.contentImg} src='https://images.wallpaperscraft.ru/image/single/gorodskoj_pejzazh_gorod_vid_sverhu_195543_1280x720.jpg' alt='' /></div> */}
+
             <div className={Classes.descriptionBlock}>
                 <img src={props.profile.photos.large} alt='' />
-                <ProfileStatus status={'deadInside'} />
+                <ProfileStatus {...props} />
                 <div>
                     {props.profile.fullName}
                 </div>

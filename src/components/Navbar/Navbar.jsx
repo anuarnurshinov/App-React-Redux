@@ -4,12 +4,11 @@ import FriendList from './FriendsList/FriendsList';
 import Classes from './Navbar.module.css'
 
 const isActive = (navData) => navData.isActive ? Classes.active : ''
-
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <nav className={Classes.nav}>
             <div className={Classes.item}>
-                <NavLink className={isActive} to='/profile/2'>Profile</NavLink></div>
+                <NavLink className={isActive} to={`/profile/${props.myId}`}>Profile</NavLink></div>
             <div className={Classes.item}>
                 <NavLink className={isActive} to='/dialogs'>Messages</NavLink></div>
             <div className={Classes.item}>

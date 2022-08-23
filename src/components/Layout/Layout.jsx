@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom'
-import Navbar from '../Navbar/Navbar';
+import NavbarContainer from '../Navbar/NavbarContainer';
 import HeaderContainer from './../Header/HeaderContainer';
 
 
@@ -9,7 +9,7 @@ const Layout = (props) => {
         <div>
             <div className='app-wrapper'>
                 <HeaderContainer />
-                <Navbar />
+                <NavbarContainer />
                 <Outlet />
             </div>
         </div>
