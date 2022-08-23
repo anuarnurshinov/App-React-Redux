@@ -1,52 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux/es/exports';
-import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, moveGalleryRight, moveGalleryLeft, toggleIsFetching } from './../../redux/usersReducer';
-import Users from "./Users";
-import { usersAPI } from './../../api/api';
+import { moveGalleryRight, moveGalleryLeft, getUsersThunkCreator, onPageChangedThunkCreator, addFollowThunkCreator, deleteFollowThunkCreator } from './../../redux/usersReducer';
+import Users from './Users';
+import { compose } from 'redux';
+import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+
 
 
 
 class UsersContainer extends React.Component {
+
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount)
-            });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
+
     onPageChanged = (pageNumber) => {
-        this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items);
-            });
+        this.props.onPageChangedThunkCreator(pageNumber, this.props.pageSize)
     }
-    onClickGalleryRight = () => {
-        this.props.moveGalleryRight()
+
+    onClickMoveGallery = (orientation) => {
+        orientation === 'right' ?
+            this.props.moveGalleryRight() :
+            this.props.moveGalleryLeft()
     }
-    onClickGalleryLeft = () => {
-        this.props.moveGalleryLeft()
-    }
+
     onClickSendFollowToServer = (userId) => {
-        usersAPI.postFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    this.props.follow(userId)
-                }
-            });
+        this.props.addFollowThunkCreator(userId)
     }
+
     onClickSendUnfollowToServer = (userId) => {
-        usersAPI.deleteFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    this.props.unfollow(userId)
-                }
-            });
+        this.props.deleteFollowThunkCreator(userId)
     }
+
 
 
     render() {
@@ -54,14 +39,15 @@ class UsersContainer extends React.Component {
             <Users
                 onClickSendUnfollowToServer={this.onClickSendUnfollowToServer}
                 onClickSendFollowToServer={this.onClickSendFollowToServer}
-                onClickGalleryLeft={this.onClickGalleryLeft}
                 onPageChanged={this.onPageChanged}
-                onClickGalleryRight={this.onClickGalleryRight}
+                onClickMoveGallery={this.onClickMoveGallery}
                 {...this.props}
             />
         </>
     }
+
 }
+
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -74,15 +60,16 @@ const mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
     moveGalleryRight,
     moveGalleryLeft,
-    toggleIsFetching
+    getUsersThunkCreator,
+    onPageChangedThunkCreator,
+    addFollowThunkCreator,
+    deleteFollowThunkCreator,
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps))
+    (UsersContainer)

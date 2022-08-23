@@ -1,7 +1,8 @@
-import React from "react";
-import Dialog from "./Dialog/Dialog";
-import Classes from "./Dialogs.module.css";
+import React from 'react';
+import Dialog from './Dialog/Dialog';
+import Classes from './Dialogs.module.css';
 import Message from './Message/Message'
+
 
 
 
@@ -32,7 +33,7 @@ const Dialogs = (props) => {
             <div className={Classes.messages}>
                 {messagesElements}
                 <div>
-                    <textarea value={newMessageBody} onChange={onChangeNewMessage} placeholder="Введите сообщение" ref={newMessageElement}>
+                    <textarea value={newMessageBody} onChange={onChangeNewMessage} placeholder='Введите сообщение' ref={newMessageElement}>
                     </textarea>
                 </div>
                 <div>

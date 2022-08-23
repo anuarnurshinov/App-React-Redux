@@ -1,9 +1,9 @@
-import React from "react"
+import React from 'react'
 import Classes from './Users.module.css'
 import userPhoto from '../../assets/images/user.png'
-import Preloader from "../Common/Preloader/Preloader"
+import Preloader from '../Common/Preloader/Preloader'
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios'
+
 
 const Users = (props) => {
 
@@ -15,7 +15,7 @@ const Users = (props) => {
     return (
         <div>
             <div className={Classes.pageListBlock}>
-                <button onClick={() => { props.onClickGalleryLeft() }}> Назад </button>
+                <button onClick={() => { props.onClickMoveGallery('left') }}> Назад </button>
                 <div className={Classes.galleryContainer}>
                     <div className={Classes.gallery} style={{ marginLeft: props.galleryPosition }}>
                         {pagesArray.map(page => {
@@ -27,7 +27,7 @@ const Users = (props) => {
                         })}
                     </div>
                 </div>
-                <button onClick={() => { props.onClickGalleryRight() }}> Вперед </button>
+                <button onClick={() => { props.onClickMoveGallery('right') }}> Вперед </button>
                 {props.isFetching ? <Preloader /> : null}
 
             </div>
@@ -60,10 +60,10 @@ const Users = (props) => {
                         </span>
                         <span>
                             <div>
-                                {"user.location.city"}
+                                {'user.location.city'}
                             </div>
                             <div>
-                                {"user.location.country"}
+                                {'user.location.country'}
                             </div>
                         </span>
                     </span>

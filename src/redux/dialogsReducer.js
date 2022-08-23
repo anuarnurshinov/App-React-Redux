@@ -13,7 +13,7 @@ let initialState = {
         },
         {
             id: '3',
-            message: "What's up?"
+            message: 'Whats up?'
         },
         {
             id: '4',

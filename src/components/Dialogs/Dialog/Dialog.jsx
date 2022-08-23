@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Classes from "../Dialogs.module.css";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import Classes from '../Dialogs.module.css';
 
 const Dialog = (props) => {
     return (

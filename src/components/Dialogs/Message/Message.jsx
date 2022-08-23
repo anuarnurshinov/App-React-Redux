@@ -1,5 +1,5 @@
-import React from "react";
-import Classes from "../Dialogs.module.css";
+import React from 'react';
+import Classes from '../Dialogs.module.css';
 
 const Message = (props) => {
     return (

@@ -1,3 +1,5 @@
+import { usersAPI } from './../api/api';
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -83,3 +85,47 @@ export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT
 export const moveGalleryRight = (currentPage) => ({ type: MOVE_GALLERY_RIGHT, currentPage })
 export const moveGalleryLeft = (currentPage) => ({ type: MOVE_GALLERY_LEFT, currentPage })
 export const toggleIsFetching = (toggle) => ({ type: TOGGLE_IS_FETCHING, toggle })
+
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            });
+    }
+}
+export const onPageChangedThunkCreator = (pageNumber, pageSize) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        dispatch(setCurrentPage(pageNumber))
+        usersAPI.getUsers(pageNumber, pageSize)
+            .then(data => {
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+            });
+    }
+}
+export const addFollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        usersAPI.postFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(follow(userId))
+                }
+            });
+    }
+}
+export const deleteFollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        usersAPI.deleteFollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollow(userId))
+                }
+            });
+    }
+}
