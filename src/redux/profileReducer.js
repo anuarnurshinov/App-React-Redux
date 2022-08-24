@@ -24,7 +24,6 @@ let initialState = {
         },
 
     ],
-    newPostText: 'itKama',
     profile: null,
     status: '',
 }
@@ -36,7 +35,7 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, {
                     id: `${state.posts.length + 1}`,
-                    message: state.newPostText,
+                    message: action.postText,
                     likesCount: 0,
                 }],
                 newPostText: ''
@@ -66,7 +65,7 @@ export const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
+export const addPost = (postText) => ({ type: ADD_POST, postText })
 
 export const updateNewPostTextActionCreator = (text) => {
 

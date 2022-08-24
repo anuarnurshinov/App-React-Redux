@@ -8,7 +8,7 @@ import Layout from './components/Layout/Layout';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import Login from './components/Login/Login';
+import LoginContainer from './components/Login/LoginContainer';
 
 
 
@@ -18,7 +18,7 @@ const App = (props) => {
       <Routes class='app-wrapper-content'>
         <Route path='/' element={<Layout />}>
           <Route path='/*'></Route>
-          <Route path='/login' element={<Login />}></Route>
+          <Route path='/login' element={<LoginContainer />}></Route>
           <Route path='/profile/:id' element={<ProfileContainer />} />
           <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />

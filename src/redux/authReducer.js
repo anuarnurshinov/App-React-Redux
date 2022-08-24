@@ -36,3 +36,14 @@ export const setAuthUserDataThunkCreator = () => {
             });
     }
 }
+
+export const getAuthorizedThunkCreator = (formData) => {
+    return (dispatch) => {
+        authAPI.getAuthorized(formData)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    alert('Вы авторизованы')
+                }
+            })
+    }
+}

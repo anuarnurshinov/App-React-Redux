@@ -1,9 +1,11 @@
 import React from 'react';
+import LoginForm from './LoginForm/LoginForm';
 
-const Login = () => {
+const Login = (props) => {
     return (
         <div>
-            Login
+            <h1> Войдите </h1>
+            <LoginForm {...props} />
         </div>
     )
 }
