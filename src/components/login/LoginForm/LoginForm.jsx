@@ -1,36 +1,43 @@
-import { Form, Field } from 'react-final-form'
+import { useForm } from 'react-hook-form';
 import React from 'react'
 
 
 
 
 const LoginForm = (props) => {
-    const onSubmit = (formData) => {
-        props.getAuthorizedThunkCreator(formData)
+
+    const { register, handleSubmit, reset, formState: {
+        errors,
+    } } = useForm({
+        mode: 'onChange'
+    })
+
+    const onSubmit = (data) => {
+        props.getAuthorizedThunkCreator(data)
+        reset()
     }
 
-    return <Form
-        onSubmit={onSubmit}
-        render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Логин</label>
-                    <Field name="email" component="input" placeholder="Логин" />
-                </div>
-                <div>
-                    <label>Пароль</label>
-                    <Field name="password" component="input" placeholder="Пароль" />
-                </div><div>
-                    <label>Запомнить меня</label>
-                    <Field name="rememberMe"
-                        component="input"
-                        type="checkbox" />
-                </div>
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('email', {
+                required: {
+                    value: true,
+                    message: 'Поле обязательно'
+                }
+            })} placeholder={errors.email ? errors.email.message : 'Почта'} />
+            <input {...register('password', {
+                required: {
+                    value: true,
+                    message: 'Поле обязательно'
+                }
+            })} placeholder={errors.password ? errors.password.message : 'Пароль'} />
+            <label> Запомнить </label>
+            <input type="checkbox"{...register('rememberMe')} />
+            <input type={'submit'} />
 
-                <button type="submit">Submit</button>
-            </form>
-        )}
-    />
+        </form>
+    )
 }
+
 
 export default LoginForm

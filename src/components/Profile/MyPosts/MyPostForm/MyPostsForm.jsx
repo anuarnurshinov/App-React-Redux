@@ -23,10 +23,6 @@ const MyPostsForm = (props) => {
 
     return (
         <div>
-            <h1>
-                ReactHookForm
-            </h1>
-
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input {...register('postMessage', {
                     required: true,

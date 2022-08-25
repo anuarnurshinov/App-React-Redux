@@ -4,6 +4,7 @@ import { dialogsReducer } from './dialogsReducer';
 import { sidebarReducer } from './sidebarReducer';
 import { usersReducers } from './usersReducer';
 import { authReducer } from './authReducer';
+import { appReducer } from './appReducer';
 
 
 export let store = configureStore({
@@ -13,6 +14,7 @@ export let store = configureStore({
         sidebarPage: sidebarReducer,
         usersPage: usersReducers,
         auth: authReducer,
+        app: appReducer,
     }
 });
 

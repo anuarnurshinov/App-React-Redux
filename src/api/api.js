@@ -51,5 +51,9 @@ export const authAPI = {
     getAuthorized(formData) {
         return instance.post(`/auth/login`, formData)
             .then(unPacking)
+    },
+    deleteAuthorization() {
+        return instance.delete(`/auth/login`)
+            .then(unPacking)
     }
 }

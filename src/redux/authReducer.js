@@ -1,5 +1,6 @@
 import { authAPI } from './../api/api';
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
+const DELETE_AUTH_USER_DATA = 'DELETE_AUTH_USER_DATA'
 
 
 let initialState = {
@@ -18,16 +19,25 @@ export const authReducer = (state = initialState, action) => {
                 ...action.data,
                 isAuth: true,
             }
+        case DELETE_AUTH_USER_DATA:
+            return {
+                ...state,
+                isAuth: false,
+                login: null,
+                email: null,
+                userId: null,
+            }
         default:
             return state;
     }
 }
 
 export const setAuthUserData = (userId, email, login) => ({ type: SET_AUTH_USER_DATA, data: { userId, email, login } })
+export const deleteAuthUserData = () => ({ type: DELETE_AUTH_USER_DATA })
 
 export const setAuthUserDataThunkCreator = () => {
     return (dispatch) => {
-        authAPI.getAuthData()
+        return authAPI.getAuthData()
             .then(data => {
                 if (data.resultCode === 0) {
                     let { id, email, login } = data.data
@@ -42,7 +52,18 @@ export const getAuthorizedThunkCreator = (formData) => {
         authAPI.getAuthorized(formData)
             .then(data => {
                 if (data.resultCode === 0) {
-                    alert('Вы авторизованы')
+                    dispatch(setAuthUserDataThunkCreator())
+                }
+            })
+    }
+}
+
+export const deleteAuthorizedThunkCreator = () => {
+    return (dispatch) => {
+        authAPI.deleteAuthorization()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(deleteAuthUserData())
                 }
             })
     }
