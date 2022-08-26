@@ -1,5 +1,5 @@
 
-import { setAuthUserDataThunkCreator } from './authReducer';
+import { setAuthUserDataThunkCreator } from '../auth/authReducer';
 const SET_INITIALIZATION_SUCCESS = 'SET_INITIALIZATION_SUCCESS'
 
 

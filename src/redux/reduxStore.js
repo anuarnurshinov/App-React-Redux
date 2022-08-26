@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { profileReducer } from './profileReducer';
-import { dialogsReducer } from './dialogsReducer';
-import { sidebarReducer } from './sidebarReducer';
-import { usersReducers } from './usersReducer';
-import { authReducer } from './authReducer';
-import { appReducer } from './appReducer';
+import { profileReducer } from './profile/profileReducer';
+import { dialogsReducer } from './dialogs/dialogsReducer';
+import { sidebarReducer } from './sidebar/sidebarReducer';
+import { usersReducers } from './users/usersReducer';
+import { authReducer } from './auth/authReducer';
+import { appReducer } from './app/appReducer';
 
 
 export let store = configureStore({

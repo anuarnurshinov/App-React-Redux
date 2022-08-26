@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux/es/exports';
 import { withRouter } from '../Common/WithRouter/WithRouter'
-import { getUserProfileThunkCreator, getStatusThunkCreator, sendNewStatusThunkCreator } from './../../redux/profileReducer';
+import { getUserProfileThunkCreator, getStatusThunkCreator, sendNewStatusThunkCreator } from './../../redux/profile/profileReducer';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 

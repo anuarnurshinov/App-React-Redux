@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux/es/exports';
-import { moveGalleryRight, moveGalleryLeft, getUsersThunkCreator, onPageChangedThunkCreator, addFollowThunkCreator, deleteFollowThunkCreator } from './../../redux/usersReducer';
+import { moveGalleryRight, moveGalleryLeft, getUsersThunkCreator, onPageChangedThunkCreator, addFollowThunkCreator, deleteFollowThunkCreator } from './../../redux/users/usersReducer';
 import Users from './Users';
 import { compose } from 'redux';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
+import { getCurrentPage, getGalleryPosition, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../redux/users/usersSelectors';
 
 
 
@@ -50,12 +51,12 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        galleryPosition: state.usersPage.galleryPosition,
-        isFetching: state.usersPage.isFetching
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        galleryPosition: getGalleryPosition(state),
+        isFetching: getIsFetching(state),
     }
 }
 

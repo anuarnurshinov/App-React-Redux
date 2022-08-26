@@ -10,7 +10,7 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
-import { initialize } from './redux/appReducer';
+import { initialize } from './redux/app/appReducer';
 import Preloader from './components/Common/Preloader/Preloader';
 
 
