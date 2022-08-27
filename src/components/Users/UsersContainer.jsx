@@ -5,6 +5,7 @@ import Users from './Users';
 import { compose } from 'redux';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { getCurrentPage, getGalleryPosition, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from '../../redux/users/usersSelectors';
+import { getUsersSuper } from './../../redux/users/usersSelectors';
 
 
 
