@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 
 const MyPostsForm = (props) => {
-
+    console.log('Render');
     const {
         register,
         formState: {
@@ -39,5 +39,5 @@ const MyPostsForm = (props) => {
 }
 
 
-export default MyPostsForm;
+export default React.memo(MyPostsForm);
 
