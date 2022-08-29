@@ -4,6 +4,7 @@ import { getAuthorizedThunkCreator } from '../../redux/auth/authReducer';
 import { compose } from 'redux';
 import { successfulLoginRedirect } from '../../hoc/withAuthRedirect'
 
+
 const mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
