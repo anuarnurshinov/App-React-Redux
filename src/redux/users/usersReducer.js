@@ -1,13 +1,14 @@
 import { usersAPI } from './../../api/api';
+import { updateObjectInArray } from './../../utils/objectHelper';
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
-const MOVE_GALLERY_RIGHT = 'MOVE_GALLERY_RIGHT'
-const MOVE_GALLERY_LEFT = 'MOVE_GALLERY_LEFT'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const FOLLOW = 'users/FOLLOW'
+const UNFOLLOW = 'users/UNFOLLOW'
+const SET_USERS = 'users/SET_USERS'
+const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT'
+const MOVE_GALLERY_RIGHT = 'users/MOVE_GALLERY_RIGHT'
+const MOVE_GALLERY_LEFT = 'users/MOVE_GALLERY_LEFT'
+const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
 
 let initialState = {
     users: [],
@@ -23,23 +24,12 @@ export const usersReducers = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return { ...user, followed: true }
-                    }
-                    return user
-                }),
-
+                users: updateObjectInArray(state.users, 'id', action.userId, { followed: true })
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return { ...user, followed: false }
-                    }
-                    return user
-                }),
+                users: updateObjectInArray(state.users, 'id', action.userId, { followed: false })
 
             }
         case SET_USERS:
@@ -88,44 +78,33 @@ export const toggleIsFetching = (toggle) => ({ type: TOGGLE_IS_FETCHING, toggle 
 
 
 export const getUsersThunkCreator = (currentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
-            });
+        let data = await usersAPI.getUsers(currentPage, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
     }
 }
 export const onPageChangedThunkCreator = (pageNumber, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(pageNumber))
-        usersAPI.getUsers(pageNumber, pageSize)
-            .then(data => {
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.items))
-            });
+        let data = await usersAPI.getUsers(pageNumber, pageSize)
+        dispatch(toggleIsFetching(false))
+        dispatch(setUsers(data.items))
     }
 }
-export const addFollowThunkCreator = (userId) => {
-    return (dispatch) => {
-        usersAPI.postFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(follow(userId))
-                }
-            });
+export const addFollowThunkCreator = (userId) => async (dispatch) => {
+    let data = await usersAPI.postFollow(userId)
+    if (data.resultCode === 0) {
+        dispatch(follow(userId))
     }
 }
-export const deleteFollowThunkCreator = (userId) => {
-    return (dispatch) => {
-        usersAPI.deleteFollow(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(unfollow(userId))
-                }
-            });
+export const deleteFollowThunkCreator = (userId) => async (dispatch) => {
+    let data = await usersAPI.deleteFollow(userId)
+    if (data.resultCode === 0) {
+        dispatch(unfollow(userId))
     }
 }
+

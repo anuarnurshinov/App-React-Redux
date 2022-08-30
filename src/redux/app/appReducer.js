@@ -1,6 +1,6 @@
 
 import { setAuthUserDataThunkCreator } from '../auth/authReducer';
-const SET_INITIALIZATION_SUCCESS = 'SET_INITIALIZATION_SUCCESS'
+const SET_INITIALIZATION_SUCCESS = 'app/SET_INITIALIZATION_SUCCESS'
 
 
 
@@ -23,11 +23,7 @@ export const initializationSuccess = () => ({
     type: SET_INITIALIZATION_SUCCESS,
 })
 
-export const initialize = () => {
-    return (dispatch) => {
-        let promise = dispatch(setAuthUserDataThunkCreator())
-        promise.then(() => {
-            dispatch(initializationSuccess())
-        })
-    }
+export const initialize = () => async (dispatch) => {
+    await dispatch(setAuthUserDataThunkCreator())
+    dispatch(initializationSuccess())
 }

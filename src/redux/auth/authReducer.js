@@ -1,6 +1,6 @@
 import { authAPI } from '../../api/api';
-const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
-const DELETE_AUTH_USER_DATA = 'DELETE_AUTH_USER_DATA'
+const SET_AUTH_USER_DATA = 'auth/SET_AUTH_USER_DATA'
+const DELETE_AUTH_USER_DATA = 'auth/DELETE_AUTH_USER_DATA'
 
 
 let initialState = {
@@ -35,36 +35,25 @@ export const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login) => ({ type: SET_AUTH_USER_DATA, data: { userId, email, login } })
 export const deleteAuthUserData = () => ({ type: DELETE_AUTH_USER_DATA })
 
-export const setAuthUserDataThunkCreator = () => {
-    return (dispatch) => {
-        return authAPI.getAuthData()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let { id, email, login } = data.data
-                    dispatch(setAuthUserData(id, email, login))
-                }
-            });
+export const setAuthUserDataThunkCreator = () => async (dispatch) => {
+    let data = await authAPI.getAuthData()
+    if (data.resultCode === 0) {
+        let { id, email, login } = data.data
+        dispatch(setAuthUserData(id, email, login))
     }
 }
 
-export const getAuthorizedThunkCreator = (formData) => {
-    return (dispatch) => {
-        authAPI.getAuthorized(formData)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthUserDataThunkCreator())
-                }
-            })
+
+export const getAuthorizedThunkCreator = (formData) => async (dispatch) => {
+    let data = await authAPI.getAuthorized(formData)
+    if (data.resultCode === 0) {
+        dispatch(setAuthUserDataThunkCreator())
     }
 }
 
-export const deleteAuthorizedThunkCreator = () => {
-    return (dispatch) => {
-        authAPI.deleteAuthorization()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    dispatch(deleteAuthUserData())
-                }
-            })
+export const deleteAuthorizedThunkCreator = () => async (dispatch) => {
+    let data = await authAPI.deleteAuthorization()
+    if (data.resultCode === 0) {
+        dispatch(deleteAuthUserData())
     }
 }

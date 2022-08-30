@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import React from 'react'
+import { createFieldForForm } from './../../../utils/createField';
 
 
 
@@ -7,10 +8,9 @@ import React from 'react'
 const LoginForm = (props) => {
 
     const { register, handleSubmit, reset, formState: {
-        errors,
-    } } = useForm({
-        mode: 'onChange'
-    })
+        errors, } } = useForm({
+            mode: 'onChange'
+        })
 
     const onSubmit = (data) => {
         props.getAuthorizedThunkCreator(data)
@@ -19,18 +19,8 @@ const LoginForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register('email', {
-                required: {
-                    value: true,
-                    message: 'Поле обязательно'
-                }
-            })} placeholder={errors.email ? errors.email.message : 'Почта'} />
-            <input {...register('password', {
-                required: {
-                    value: true,
-                    message: 'Поле обязательно'
-                }
-            })} placeholder={errors.password ? errors.password.message : 'Пароль'} />
+            {createFieldForForm(register, 'email', true, 'Поле обязательно', errors, 'Почта')}
+            {createFieldForForm(register, 'password', true, 'Поле обязательно', errors, 'Пароль')}
             <label> Запомнить </label>
             <input type="checkbox"{...register('rememberMe')} />
             <input type={'submit'} />
