@@ -19,6 +19,7 @@ export const store = configureStore({
     },
 }, composeEnhancers(applyMiddleware()));
 
+window.store = store
 
 
 

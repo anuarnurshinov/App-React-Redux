@@ -40,6 +40,16 @@ export const profileAPI = {
         })
             .then(unPacking)
 
+    },
+    sendPhoto(image) {
+        let formData = new FormData();
+        formData.append('image', image);
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(unPacking)
     }
 }
 

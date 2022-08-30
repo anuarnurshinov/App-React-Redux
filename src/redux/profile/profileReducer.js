@@ -4,6 +4,7 @@ const ADD_POST = 'profile/ADD-POST'
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE'
 const SET_STATUS = 'profile/SET_STATUS'
 const UPDATE_STATUS = 'profile/UPDATE_STATUS'
+const UPDATE_PHOTO = 'profile/UPDATE_PHOTO'
 
 let initialState = {
     posts: [
@@ -60,6 +61,14 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: state.newStatusText
             }
+        case UPDATE_PHOTO:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photos,
+                }
+            }
         default:
             return state;
     }
@@ -90,6 +99,10 @@ export const setStatus = (status) => ({
 export const updateNewStatus = () => ({
     type: UPDATE_STATUS,
 })
+export const updatePhoto = (photos) => ({
+    type: UPDATE_PHOTO,
+    photos,
+})
 
 
 
@@ -110,3 +123,9 @@ export const sendNewStatusThunkCreator = (status) => async (dispatch) => {
     }
 }
 
+export const savePhotoThunkCreator = (photo) => async (dispatch) => {
+    let data = await profileAPI.sendPhoto(photo)
+    if (data.resultCode === 0) {
+        dispatch(updatePhoto(data.data.photos))
+    }
+}

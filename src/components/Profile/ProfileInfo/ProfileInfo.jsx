@@ -1,7 +1,6 @@
 import React from 'react';
 import Classes from './ProfileInfo.module.css'
 import Preloader from './../../Common/Preloader/Preloader';
-import ProfileStatus from './ProfileStatus/ProfileStatus'
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -20,12 +19,19 @@ const ProfileInfo = (props) => {
             })
         }
     }
+
+    const mainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            props.savePhotoThunkCreator(e.target.files[0])
+        }
+    }
+
     return (
         <div>
-            {/* <div><img className={Classes.contentImg} src='https://images.wallpaperscraft.ru/image/single/gorodskoj_pejzazh_gorod_vid_sverhu_195543_1280x720.jpg' alt='' /></div> */}
-
             <div className={Classes.descriptionBlock}>
                 <img src={props.profile.photos.large} alt='' />
+                {props.ownerId === +props.params.id ?
+                    <input type={"file"} onChange={mainPhotoSelected} /> : null}
                 <ProfileStatusWithHooks {...props} />
                 <div>
                     {props.profile.fullName}

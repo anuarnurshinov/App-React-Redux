@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux/es/exports';
 import { withRouter } from '../Common/WithRouter/WithRouter'
-import { getUserProfileThunkCreator, getStatusThunkCreator, sendNewStatusThunkCreator } from './../../redux/profile/profileReducer';
+import { getUserProfileThunkCreator, getStatusThunkCreator, sendNewStatusThunkCreator, savePhotoThunkCreator } from './../../redux/profile/profileReducer';
 import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
@@ -30,12 +30,14 @@ let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     newStatusText: state.profilePage.newStatusText,
+    ownerId: state.auth.userId
 
 })
 let mapDispatchToProps = {
     getUserProfileThunkCreator,
     getStatusThunkCreator,
     sendNewStatusThunkCreator,
+    savePhotoThunkCreator,
 }
 
 export default compose(

@@ -3,7 +3,7 @@ import React from 'react'
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
@@ -26,8 +26,9 @@ class App extends React.Component {
         <BrowserRouter >
           <Routes class='app-wrapper-content'>
             <Route path='/' element={<Layout />}>
-              <Route path='/*'></Route>
-              <Route path='/login' element={<LoginContainer />}></Route>
+              <Route path='/*' />
+              <Route path='/login' element={<LoginContainer />} />
+              <Route path='/profile' element={<Navigate to={'/profile/' + this.props.ownerId} />} />
               <Route path='/profile/:id' element={<ProfileContainer />} />
               <Route path='/dialogs/*' element={<DialogsContainer />} />
               <Route path='/news' element={<News />} />
@@ -47,6 +48,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     initialized: state.app.initialized,
+    ownerId: state.auth.userId
   }
 }
 

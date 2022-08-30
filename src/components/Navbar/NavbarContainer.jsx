@@ -4,7 +4,6 @@ import Navbar from './Navbar';
 
 const mapStateToProps = (state) => {
     return {
-        myId: state.auth.userId
     }
 }
 
