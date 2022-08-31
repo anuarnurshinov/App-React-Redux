@@ -112,10 +112,12 @@ export const setStatus = (status) => ({
 export const updateNewStatus = () => ({
     type: UPDATE_STATUS,
 })
+
 export const updatePhoto = (photos) => ({
     type: UPDATE_PHOTO,
     photos,
 })
+
 export const updateProfileInfo = (data) => ({
     type: UPDATE_PROFILE_INFORMATION,
     data,

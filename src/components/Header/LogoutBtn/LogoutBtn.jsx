@@ -1,6 +1,6 @@
 import React from 'react'
 import Classes from './LogoutBtn.module.css';
-
+import Button from '@mui/material/Button';
 
 
 
@@ -11,7 +11,7 @@ const LogoutBtn = (props) => {
     }
     return (
         <div className={Classes.loginBlock}>
-            {props.isAuth ? <button onClick={logout}> Выйти </button> : ''}
+            {props.isAuth ? <Button variant="contained" onClick={logout}> Выйти </Button> : ''}
         </div>
     );
 }

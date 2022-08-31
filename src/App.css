@@ -1,16 +1,14 @@
-.app-wrapper {
-  width: 90vw;
+.appWrapperContent {
+  width: auto;
+  height: max-content;
   margin: 0 auto;
   display: grid;
   grid-template-areas:
-    "h h"
+    "n h"
     "n c";
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 10fr;
-  min-height:100vh;
+  
 }
 
-.app-wrapper-content {
-  grid-area: c;
-  background-color: purple;
-}
+

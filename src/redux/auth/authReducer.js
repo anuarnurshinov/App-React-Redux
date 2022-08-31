@@ -33,6 +33,7 @@ export const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (userId, email, login) => ({ type: SET_AUTH_USER_DATA, data: { userId, email, login } })
+
 export const deleteAuthUserData = () => ({ type: DELETE_AUTH_USER_DATA })
 
 export const setAuthUserDataThunkCreator = () => async (dispatch) => {
