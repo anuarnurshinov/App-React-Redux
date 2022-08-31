@@ -6,7 +6,6 @@ import { createFieldForForm } from './../../../utils/createField';
 
 
 const LoginForm = (props) => {
-
     const { register, handleSubmit, reset, formState: {
         errors, } } = useForm({
             mode: 'onChange'

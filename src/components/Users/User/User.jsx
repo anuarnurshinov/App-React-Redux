@@ -3,7 +3,7 @@ import userPhoto from '../../../assets/images/user.png'
 import { NavLink } from 'react-router-dom';
 
 const User = ({ user, onClickSendUnfollowToServer, onClickSendFollowToServer }) => {
-    return <div key={user.id} >
+    return <div >
         <span >
             <div>
                 <NavLink to={'/profile/' + `${user.id}`} >

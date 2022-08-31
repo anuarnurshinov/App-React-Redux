@@ -26,7 +26,7 @@ class App extends React.Component {
         <BrowserRouter >
           <Routes class='app-wrapper-content'>
             <Route path='/' element={<Layout />}>
-              <Route path='/*' />
+              <Route path='/*' element={<div> Страница не найдена </div>} />
               <Route path='/login' element={<LoginContainer />} />
               <Route path='/profile' element={<Navigate to={'/profile/' + this.props.ownerId} />} />
               <Route path='/profile/:id' element={<ProfileContainer />} />

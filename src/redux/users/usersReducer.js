@@ -10,6 +10,7 @@ const MOVE_GALLERY_RIGHT = 'users/MOVE_GALLERY_RIGHT'
 const MOVE_GALLERY_LEFT = 'users/MOVE_GALLERY_LEFT'
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING'
 
+
 let initialState = {
     users: [],
     pageSize: 5,

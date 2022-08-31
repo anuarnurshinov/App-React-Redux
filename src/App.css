@@ -7,7 +7,6 @@
     "n c";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 1fr 10fr;
-  /* grid-gap: 10px; */
   min-height:100vh;
 }
 

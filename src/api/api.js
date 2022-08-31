@@ -50,7 +50,11 @@ export const profileAPI = {
             }
         })
             .then(unPacking)
-    }
+    },
+    sendProfileInformation(data) {
+        return instance.put('profile', data)
+            .then(unPacking)
+    },
 }
 
 export const authAPI = {

@@ -18,7 +18,7 @@ const Users = ({ onClickSendUnfollowToServer, onClickSendFollowToServer, totalUs
                 onPageChanged={onPageChanged}
                 isFetching={isFetching} />
             {users.map(user => {
-                return <User
+                return <User key={user.id}
                     user={user}
                     onClickSendUnfollowToServer={onClickSendUnfollowToServer}
                     onClickSendFollowToServer={onClickSendFollowToServer} />
