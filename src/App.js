@@ -24,7 +24,7 @@ class App extends React.Component {
     if (this.props.initialized) {
       return (
         <BrowserRouter >
-          <Routes class='app-wrapper-content'>
+          <Routes class='app-wrapper'>
             <Route path='/' element={<Layout />}>
               <Route path='/*' element={<div> Страница не найдена </div>} />
               <Route path='/login' element={<LoginContainer />} />

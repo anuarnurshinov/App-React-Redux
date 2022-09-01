@@ -1,0 +1,11 @@
+.item a {
+  color: rgb(117 117 117);
+  text-decoration: none;
+  font-size: 30px;
+}
+.item a.active {
+  color: rgb(25 118 210);
+}
+.item a.active div {
+  color: rgb(25 118 210);
+}

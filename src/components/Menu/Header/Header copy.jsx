@@ -8,7 +8,7 @@ const Header = (props) => {
         <header className={Classes.header}>
             <img
                 className='App-logo'
-                src='https://upload.wikimedia.org/wikipedia/commons/a/ab/Android_O_Preview_Logo.png'
+                src={props.profile.photos.large}
                 alt='' />
             <LogoutBtn
                 isAuth={props.isAuth}

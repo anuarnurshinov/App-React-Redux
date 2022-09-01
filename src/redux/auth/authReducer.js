@@ -9,6 +9,7 @@ let initialState = {
     login: null,
     isFetching: true,
     isAuth: false,
+    userPhoto: null,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -57,3 +58,7 @@ export const deleteAuthorizedThunkCreator = () => async (dispatch) => {
         dispatch(deleteAuthUserData())
     }
 }
+
+// export const getUserPhoto = () => async (dispatch) => {
+// let data = await authAPI.
+// }
