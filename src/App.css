@@ -1,5 +1,4 @@
 .app-wrapper {
-  color: black;
   margin: 70px 10px;
   display: grid;
   grid-template-columns: 0fr 10fr;

@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
+        ownerPhoto: state.auth.smallUserPhoto,
     }
 }
 const mapDispatchToProps = {

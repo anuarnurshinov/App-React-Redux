@@ -1,5 +1,56 @@
 .item {
-  color: greenyellow
+}
+.box {
+  width: 80vh;
+  height: 80vh;
+  margin: auto;
+  position: relative;
+  display: block;
+}
+
+.center {
+  padding-top: 50%;
+}
+
+.dialog1 {
+  height: 20%;
+  width: 40%;
+  background-color: var(--main-dark-color);
+  position: absolute;
+  border-radius: 10%;
+}
+
+.leftPoint {
+  width: 0;
+  height: 0;
+  border-left: 2vh solid transparent;
+  border-right: 2vh solid transparent;
+  border-top: 10vh solid var(--main-dark-color);
+  position: absolute;
+  top: 45%;
+  left: -10%;
+  transform: rotate(60deg);
+}
+
+.dialog2 {
+  height: 20%;
+  width: 40%;
+  background-color: var(--main-light-color);
+  position: absolute;
+  border-radius: 10%;
+  right: 0;
+}
+
+.rightPoint {
+  width: 0;
+  height: 0;
+  border-left: 2vh solid transparent;
+  border-right: 2vh solid transparent;
+  border-top: 10vh solid var(--main-light-color);
+  position: absolute;
+  top: 45%;
+  right: -10%;
+  transform: rotate(-60deg);
 }
 .itemImg {
   object-fit: cover;

@@ -71,7 +71,6 @@ export const profileReducer = (state = initialState, action) => {
                 }
             }
         case UPDATE_PROFILE_INFORMATION:
-
             return {
                 ...state,
                 profile: {
@@ -90,7 +89,6 @@ export const profileReducer = (state = initialState, action) => {
 export const addPost = (postText) => ({ type: ADD_POST, postText })
 
 export const updateNewPostTextActionCreator = (text) => {
-
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text

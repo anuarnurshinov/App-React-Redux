@@ -102,6 +102,7 @@ const Header = (props) => {
                     </Typography>
 
                     {props.isAuth ? <UserIcon
+                        smallUserPhoto={props.smallUserPhoto}
                         handleOpenUserMenu={handleOpenUserMenu}
                         anchorElUser={anchorElUser}
                         handleCloseUserMenu={handleCloseUserMenu}
@@ -121,7 +122,7 @@ const Header = (props) => {
 export default Header;
 
 
-const UserIcon = (props) => {
+export const UserIcon = (props) => {
     return (
         <Box sx={{ flexGrow: 0, position: 'absolute', right: 0 }}>
             <Tooltip title="Open settings">
