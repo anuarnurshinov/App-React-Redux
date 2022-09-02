@@ -1,0 +1,30 @@
+.avatarBlock img {
+  width: -webkit-fill-available;
+  display: block;
+  margin: 10px auto;
+  object-fit: fill;
+  border-radius: 10px;
+}
+.button {
+  position: relative;
+  top: 0;
+  width: fit-content;
+  font-size: small;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "firstButton secondButton";
+}
+
+.secondButton {
+  grid-area: secondButton;
+}
+
+.firstButton {
+  grid-area: firstButton;
+}

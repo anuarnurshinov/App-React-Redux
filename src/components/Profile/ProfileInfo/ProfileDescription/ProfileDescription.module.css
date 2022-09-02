@@ -1,0 +1,55 @@
+.userCard {
+  background: #1976d2;
+  color: white;
+  border-radius: 6px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "name nameValue"
+    "aboutMe aboutMeValue"
+    "work workValue";
+}
+
+.userCard div {
+  margin: 6px;
+  margin-left: 0px;
+}
+
+.name {
+  color: #ffffff;
+  grid-area: name;
+  border-bottom: solid 2px;
+}
+.aboutMe {
+  color: #ffffff;
+  grid-area: aboutMe;
+  border-bottom: solid 2px;
+}
+.work {
+  color: #ffffff;
+  grid-area: work;
+  border-bottom: solid 2px;
+}
+.nameValue {
+  grid-area: nameValue;
+  border-bottom: solid 2px;
+}
+.aboutMeValue {
+  grid-area: aboutMeValue;
+  border-bottom: solid 2px;
+}
+.workValue {
+  grid-area: workValue;
+  border-bottom: solid 2px;
+}
+
+.mediaBlock {
+  margin-top: 20px;
+}
+
+.mediaBlock svg {
+  font-size: 35px;
+}
