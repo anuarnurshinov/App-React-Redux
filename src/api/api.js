@@ -69,5 +69,5 @@ export const authAPI = {
     deleteAuthorization() {
         return instance.delete(`/auth/login`)
             .then(unPacking)
-    }
+    },
 }

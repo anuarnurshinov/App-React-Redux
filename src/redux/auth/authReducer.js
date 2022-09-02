@@ -1,6 +1,7 @@
 import { authAPI } from '../../api/api';
 const SET_AUTH_USER_DATA = 'auth/SET_AUTH_USER_DATA'
 const DELETE_AUTH_USER_DATA = 'auth/DELETE_AUTH_USER_DATA'
+const GET_USER_PHOTO = 'auth/GET_USER_PHOTO'
 
 
 let initialState = {
@@ -9,7 +10,6 @@ let initialState = {
     login: null,
     isFetching: true,
     isAuth: false,
-    userPhoto: null,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -28,6 +28,11 @@ export const authReducer = (state = initialState, action) => {
                 email: null,
                 userId: null,
             }
+        case GET_USER_PHOTO:
+            return {
+                ...state,
+                smallUserPhoto: action.photo,
+            }
         default:
             return state;
     }
@@ -36,12 +41,16 @@ export const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, email, login) => ({ type: SET_AUTH_USER_DATA, data: { userId, email, login } })
 export const deleteAuthUserData = () => ({ type: DELETE_AUTH_USER_DATA })
 
+
+
+
 export const setAuthUserDataThunkCreator = () => async (dispatch) => {
     let data = await authAPI.getAuthData()
     if (data.resultCode === 0) {
         let { id, email, login } = data.data
         dispatch(setAuthUserData(id, email, login))
     }
+
 }
 
 
@@ -59,6 +68,4 @@ export const deleteAuthorizedThunkCreator = () => async (dispatch) => {
     }
 }
 
-// export const getUserPhoto = () => async (dispatch) => {
-// let data = await authAPI.
-// }
+

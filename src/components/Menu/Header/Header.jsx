@@ -11,12 +11,16 @@ import Avatar from '@mui/material/Avatar';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-
+import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 const settings = ['Профиль', 'Настройки', 'Выйти'];
 
+
 const Header = (props) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null)
+
+    let navigate = useNavigate();
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -24,6 +28,25 @@ const Header = (props) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     }
+    const redirect = (menuItem) => {
+        switch (menuItem) {
+            case 'Профиль':
+                navigate('/profile')
+                break
+            case 'Настройки':
+                navigate('/settings')
+                break
+            case 'Выйти':
+                props.deleteAuthorizedThunkCreator()
+                break;
+            case 'Войти':
+                navigate('/login')
+                break
+            default:
+                break;
+        }
+    }
+
     return (
         <AppBar position="static">
             <Container maxWidth="x2">
@@ -77,35 +100,19 @@ const Header = (props) => {
                     >
                         LOGO
                     </Typography>
-                    <Box sx={{ flexGrow: 0, position: 'absolute', right: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src={null} />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
+
+                    {props.isAuth ? <UserIcon
+                        handleOpenUserMenu={handleOpenUserMenu}
+                        anchorElUser={anchorElUser}
+                        handleCloseUserMenu={handleCloseUserMenu}
+                        redirect={redirect} />
+                        :
+                        <Button
+                            onClick={() => { redirect('Войти') }}
+                            variant="contained"
+                            sx={{ flexGrow: 0, position: 'absolute', right: 0 }}>
+                            Войти
+                        </Button>}
                 </Toolbar>
             </Container>
         </AppBar>
@@ -113,5 +120,39 @@ const Header = (props) => {
 };
 export default Header;
 
+
+const UserIcon = (props) => {
+    return (
+        <Box sx={{ flexGrow: 0, position: 'absolute', right: 0 }}>
+            <Tooltip title="Open settings">
+                <IconButton onClick={props.handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={props.smallUserPhoto} />
+                </IconButton>
+            </Tooltip>
+            <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={props.anchorElUser}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                open={Boolean(props.anchorElUser)}
+                onClose={props.handleCloseUserMenu}
+            >
+                {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={() => { props.redirect(setting) }}>
+                        <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                ))}
+            </Menu>
+        </Box>
+    )
+}
 
 

@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 
 const MyPostsForm = (props) => {
-    console.log('Render');
     const {
         register,
         formState: {

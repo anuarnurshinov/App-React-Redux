@@ -24,8 +24,8 @@ import Classes from './Menu.module.css'
 import HeaderContainer from './Header/HeaderContainer';
 
 const drawerWidth = 240;
-const isActive = (navData) => navData.isActive ? Classes.active : ''
 
+const isActive = (navData) => navData.isActive ? Classes.active : ''
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -93,6 +93,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function Menu() {
+
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -114,45 +115,9 @@ export default function Menu() {
                     handleDrawerOpen={handleDrawerOpen} />
             </AppBar>
             <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
-                </DrawerHeader>
+                <HideBtn theme={theme} handleDrawerClose={handleDrawerClose} />
                 <Divider />
-                <List>
-                    {[['Профиль', `/profile`], ['Сообщения', '/dialogs'], ['Новости', '/news'], ['Музыка', '/music'], ['Настройки', '/settings'], ['Пользователи', '/users'],].map((text, index) => (
-                        <ListItem className={Classes.item} key={text} disablePadding sx={{ display: 'block' }}>
-                            <NavLink className={isActive} to={`${text[1]}`}>
-                                <ListItemButton
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? 'initial' : 'center',
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : 'auto',
-                                            justifyContent: 'center',
-                                        }}
-                                    >
-                                        {index === 0 && <AccountCircleIcon />}
-                                        {index === 1 && <ForumIcon />}
-                                        {index === 2 && <FeedIcon />}
-                                        {index === 3 && <MusicNoteIcon />}
-                                        {index === 4 && <SettingsIcon />}
-                                        {index === 5 && <GroupIcon />}
-
-                                    </ListItemIcon>
-                                    <ListItemText primary={text[0]} sx={{ opacity: open ? 1 : 0 }} />
-                                </ListItemButton>
-                            </NavLink>
-
-                        </ListItem>
-                    ))}
-                </List>
+                <MenuItems open={open} />
                 <Divider />
             </Drawer>
         </Box>
@@ -161,3 +126,50 @@ export default function Menu() {
 
 
 
+const MenuItems = (props) => {
+    return (
+        <List>
+            {[['Профиль', `/profile`], ['Сообщения', '/dialogs'], ['Новости', '/news'], ['Музыка', '/music'], ['Настройки', '/settings'], ['Пользователи', '/users'],].map((text, index) => (
+                <ListItem className={Classes.item} key={text} disablePadding sx={{ display: 'block' }}>
+                    <NavLink className={isActive} to={`${text[1]}`}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: props.open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: props.open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                {index === 0 && <AccountCircleIcon />}
+                                {index === 1 && <ForumIcon />}
+                                {index === 2 && <FeedIcon />}
+                                {index === 3 && <MusicNoteIcon />}
+                                {index === 4 && <SettingsIcon />}
+                                {index === 5 && <GroupIcon />}
+
+                            </ListItemIcon>
+                            <ListItemText primary={text[0]} sx={{ opacity: props.open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </NavLink>
+
+                </ListItem>
+            ))}
+        </List>
+    )
+}
+
+const HideBtn = (props) => {
+    return (
+        <DrawerHeader>
+            <IconButton onClick={props.handleDrawerClose}>
+                {props.theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+        </DrawerHeader>
+    )
+}

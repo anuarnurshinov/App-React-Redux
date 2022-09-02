@@ -6,6 +6,7 @@ import { sidebarReducer } from './sidebar/sidebarReducer';
 import { usersReducers } from './users/usersReducer';
 import { authReducer } from './auth/authReducer';
 import { appReducer } from './app/appReducer';
+import { menuReducer } from './menu/menuReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
         usersPage: usersReducers,
         auth: authReducer,
         app: appReducer,
+        menu: menuReducer,
     },
 }, composeEnhancers(applyMiddleware()));
 
