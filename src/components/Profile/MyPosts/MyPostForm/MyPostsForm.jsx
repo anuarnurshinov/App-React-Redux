@@ -1,5 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import Classes from './MyPostsForm.module.css'
 
 
 const MyPostsForm = (props) => {
@@ -23,14 +27,26 @@ const MyPostsForm = (props) => {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register('postMessage', {
+                <div className={Classes.textField}><TextField {...register('postMessage', {
                     required: true,
                     minLength: {
                         value: 5,
                         message: 'Минимум 5 символов'
                     }
-                })} />
-                <input disabled={!isValid} type='submit'></input>
+                })}
+                    id="outlined-textarea"
+                    label="Опубликовать пост"
+                    multiline
+                />
+                    <span className={Classes.sendButton}>
+                        <Button style={{ marginTop: 10, marginLeft: 5 }} type='submit' variant="contained" endIcon={<SendIcon />}>
+                            Отправить
+                        </Button>
+                    </span>
+                </div>
+
+
+
             </form>
             <div style={{ height: 40 }}> {errors?.postMessage && <p>{errors?.postMessage?.message || 'Error!'}</p>} </div>
         </div>

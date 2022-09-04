@@ -1,3 +1,10 @@
-.block{
-    padding: 10px;
+.block {
+  padding: 10px;
+}
+.textField {
+  margin: 10px;
+}
+.sendButton {
+  margin: 10px;
+  padding-top: 20px;
 }

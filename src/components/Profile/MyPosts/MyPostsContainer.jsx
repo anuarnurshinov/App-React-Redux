@@ -1,10 +1,18 @@
-
+import React from 'react';
 import { addPost } from '../../../redux/profile/profileReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux/es/exports';
+import { compose } from 'redux';
 
 
 
+class MyPostsContainer extends React.Component {
+    render() {
+        return (
+            <MyPosts {...this.props} />
+        )
+    }
+}
 
 
 
@@ -12,13 +20,16 @@ const mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
-        ownerPhoto: state.auth.smallUserPhoto,
     }
 }
 const mapDispatchToProps = {
     addPost,
 }
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
-export default MyPostsContainer;
+
+
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+)(MyPostsContainer)

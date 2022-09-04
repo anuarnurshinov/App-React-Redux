@@ -1,28 +1,29 @@
 import React from 'react';
-
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Classes from './Post.module.css'
 import Avatar from '@mui/material/Avatar';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+
 
 const Post = (props) => {
     return (
         <div className={Classes.item}>
-            <Avatar alt="Remy Sharp" src={props.ownerPhoto} />
-            <p className={Classes.item}>
-                {props.message}
-            </p>
-            <div className={Classes.center}>
-                <div className={Classes.dialog1}>
-                    <div className={Classes.leftPoint}></div>
+            <div className={Classes.userInfoContainer}>
+                <div className={Classes.avatar}><Avatar alt="Remy Sharp" src={props.ownerPhoto} />
+                </div>
+                <div className={Classes.login}><a href='#'>{props.login}</a></div></div>
+            <span className={Classes.item}>
+                <div className={Classes.speechBubble}>
+                    {props.message}
+                    <div className={Classes.Likes}> <span> <ThumbUpIcon />  {props.likeCounts} </span>
+                        <span> <ThumbDownIcon /> 0 </span></div>
+
                 </div>
 
-                <div className={Classes.dialog2}>
-                    <div className={Classes.rightPoint}></div>
-                </div>
-            </div>
+            </span>
 
 
-            <div><span> Like {props.likeCounts} </span></div>
-            <div><span> Dislike </span></div>
+
 
         </div>
     )
