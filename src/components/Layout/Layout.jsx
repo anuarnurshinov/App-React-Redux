@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom'
 import MenuContainer from '../Menu/MenuContainer';
 import Classes from './Layout.module.css'
+import MainPage from './../MainPage/MainPage';
 
 
 const Layout = (props) => {

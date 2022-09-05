@@ -1,5 +1,9 @@
+import { dialogsAPI } from '../../api/api.js'
+
 
 const SEND_MESSAGE = 'dialogs/SEND-MESSAGE'
+const GET_ALL_DIALOGS = 'dialogs/GET_ALL_DIALOGS'
+const GET_MESSAGES = 'dialogs/GET_MESSAGES'
 
 let initialState = {
     messages: [
@@ -7,38 +11,15 @@ let initialState = {
             id: '1',
             message: 'Hello'
         },
-        {
-            id: '2',
-            message: 'GoodBy'
-        },
-        {
-            id: '3',
-            message: 'Whats up?'
-        },
-        {
-            id: '4',
-            message: 'Where are u?'
-        },
     ],
     dialogs: [
         {
             id: '1',
             name: 'Dima'
         },
-        {
-            id: '2',
-            name: 'Anuar'
-        },
-        {
-            id: '3',
-            name: 'Vasya'
-        },
-        {
-            id: '4',
-            name: 'Anya'
-        },
     ],
     newMessageBody: '',
+
 }
 
 
@@ -47,13 +28,60 @@ export const dialogsReducer = (state = initialState, action) => {
         case SEND_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {
-                    id: `${state.messages.length + 1}`,
-                    message: action.messageText,
-                }]
+                messages: [...state.messages, action.message]
+            }
+        case GET_ALL_DIALOGS:
+            return {
+                ...state,
+                dialogs: action.dialogs,
+            }
+        case GET_MESSAGES:
+            return {
+                ...state,
+                messages: action.messages,
             }
         default:
             return state
     }
 }
-export const sendMessageCreator = (messageText) => ({ type: SEND_MESSAGE, messageText })
+
+
+export const getAllDialogs = (dialogs) => ({ type: GET_ALL_DIALOGS, dialogs })
+export const getMessages = (messages) => ({
+    type: GET_MESSAGES, messages
+})
+export const addSendedMessage = (message) => ({
+    type: SEND_MESSAGE,
+    message
+})
+
+export const getAllDialogsThunk = () => async (dispatch) => {
+    let data = await dialogsAPI.getAllDialogs()
+    dispatch(getAllDialogs(data))
+}
+
+export const startChatThunk = (userId) => async (dispatch) => {
+    let data = await dialogsAPI.startChat(userId)
+    if (data.resultCode === 0) {
+        dispatch(getAllDialogsThunk())
+    }
+}
+
+export const getMessagesThunk = (userId) => async (dispatch) => {
+
+    let data = await dialogsAPI.getMessages(userId)
+
+    if (!data.errors) {
+
+        dispatch(getMessages(data.items))
+
+    }
+}
+
+export const sendMessageThunk = (message, userId) => async (dispatch) => {
+
+    let data = await dialogsAPI.sendMessage(message, userId)
+    if (data.resultCode === 0) {
+        dispatch(addSendedMessage(data.data.message))
+    }
+}

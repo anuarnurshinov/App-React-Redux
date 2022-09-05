@@ -6,6 +6,10 @@ const Login = (props) => {
         <div>
             <h1> Войдите </h1>
             <LoginForm {...props} />
+
+            <span>Email: free@samuraijs.com
+
+                Password: free</span>
         </div>
     )
 }

@@ -6,11 +6,11 @@ import Post from './Post/Post';
 
 
 
+
 const MyPosts = (props) => {
     let postsElements = props.posts.map((post) => {
         return <Post
-            login={props.profile.fullName}
-            ownerPhoto={props.profile.photos.small}
+            {...props}
             message={post.message}
             likeCounts={post.likesCount}
             key={post.id} />

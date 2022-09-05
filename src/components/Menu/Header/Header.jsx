@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
+import Classes from './Header.module.css'
+
 
 const settings = ['Профиль', 'Настройки', 'Выйти'];
 
@@ -21,6 +23,7 @@ const Header = (props) => {
     const [anchorElUser, setAnchorElUser] = React.useState(null)
 
     let navigate = useNavigate();
+
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -63,13 +66,13 @@ const Header = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Diversity1Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+
                     <Typography
                         variant="h6"
                         noWrap
                         component="a"
                         href="/"
-                        sx={{
+                        sx={[{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
@@ -77,17 +80,22 @@ const Header = (props) => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                        }}
-                    >
+                        }, {
+                            '&:hover': {
+                                color: 'white',
+                                fontWeight: 100,
+                            },
+                        }]}
+                    ><Diversity1Icon sx={[{ marginTop: 0.2, display: { xs: 'none', md: 'flex' }, mr: 1 },]} />
                         Logo
                     </Typography>
-                    <Diversity1Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
                     <Typography
                         variant="h5"
                         noWrap
                         component="a"
                         href=""
-                        sx={{
+                        sx={[{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
@@ -96,9 +104,14 @@ const Header = (props) => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
+                        }, {
+                            '&:hover': {
+                                color: 'white',
+                                fontWeight: 100,
+                            },
+                        }]}
+                    ><Diversity1Icon sx={{ marginTop: 0.5, display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                        Logo
                     </Typography>
 
                     {props.isAuth ? <UserIcon

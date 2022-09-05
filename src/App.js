@@ -12,6 +12,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
 import { initialize } from './redux/app/appReducer';
 import Preloader from './components/Common/Preloader/Preloader';
+import MainPage from './components/MainPage/MainPage';
 
 
 
@@ -26,12 +27,14 @@ class App extends React.Component {
       return (
         <BrowserRouter >
           <Routes class='app-wrapper'>
-            <Route path='/' element={<Layout />}>
+            <Route element={<Layout />}>
+              <Route path='/' element={<MainPage />}></Route>
               <Route path='/*' element={<div> Страница не найдена </div>} />
               <Route path='/login' element={<LoginContainer />} />
               <Route path='/profile' element={<Navigate to={'/profile/' + this.props.ownerId} />} />
               <Route path='/profile/:id' element={<ProfileContainer />} />
               <Route path='/dialogs/*' element={<DialogsContainer />} />
+              <Route path='/dialogs/:id' element={<DialogsContainer />} />
               <Route path='/news' element={<News />} />
               <Route path='/music' element={<Music />} />
               <Route path='/settings' element={<Settings />} />

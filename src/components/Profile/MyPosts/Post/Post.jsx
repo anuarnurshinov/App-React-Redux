@@ -9,9 +9,9 @@ const Post = (props) => {
     return (
         <div className={Classes.item}>
             <div className={Classes.userInfoContainer}>
-                <div className={Classes.avatar}><Avatar alt="Remy Sharp" src={props.ownerPhoto} />
+                <div className={Classes.avatar}><Avatar alt="Remy Sharp" src={props.profile.photos.small} />
                 </div>
-                <div className={Classes.login}><a href='#'>{props.login}</a></div></div>
+                <div className={Classes.login}><a href='#'>{props.profile.fullName}</a></div></div>
             <span className={Classes.item}>
                 <div className={Classes.speechBubble}>
                     {props.message}

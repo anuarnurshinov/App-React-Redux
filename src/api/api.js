@@ -63,11 +63,32 @@ export const authAPI = {
             .then(unPacking)
     },
     getAuthorized(formData) {
-        return instance.post(`/auth/login`, formData)
+        return instance.post(`auth/login`, formData)
             .then(unPacking)
     },
     deleteAuthorization() {
-        return instance.delete(`/auth/login`)
+        return instance.delete(`auth/login`)
             .then(unPacking)
     },
+}
+
+export const dialogsAPI = {
+    getAllDialogs() {
+        return instance.get('dialogs')
+            .then(unPacking)
+    },
+    startChat(userId) {
+        return instance.put(`dialogs/${userId}`)
+            .then(unPacking)
+    },
+    getMessages(userId) {
+        return instance.get(`dialogs/${userId}/messages`)
+            .then(unPacking)
+    },
+    sendMessage(message, userId) {
+        return instance.post(`dialogs/${userId}/messages`, {
+            body: message
+        })
+            .then(unPacking)
+    }
 }

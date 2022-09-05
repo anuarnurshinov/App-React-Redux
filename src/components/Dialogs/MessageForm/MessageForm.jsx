@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 
 const MessageForm = (props) => {
-
     const { register,
         handleSubmit,
         reset
@@ -12,7 +11,7 @@ const MessageForm = (props) => {
     })
 
     const onSubmit = (data) => {
-        props.sendMessage(data.messageText)
+        props.sendMessage(data.messageText, props.user)
         reset()
     }
 
