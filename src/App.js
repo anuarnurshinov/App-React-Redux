@@ -17,6 +17,7 @@ import MainPage from './components/MainPage/MainPage';
 
 
 
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -34,7 +35,6 @@ class App extends React.Component {
               <Route path='/profile' element={<Navigate to={'/profile/' + this.props.ownerId} />} />
               <Route path='/profile/:id' element={<ProfileContainer />} />
               <Route path='/dialogs/*' element={<DialogsContainer />} />
-              <Route path='/dialogs/:id' element={<DialogsContainer />} />
               <Route path='/news' element={<News />} />
               <Route path='/music' element={<Music />} />
               <Route path='/settings' element={<Settings />} />

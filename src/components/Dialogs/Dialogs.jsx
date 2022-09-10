@@ -1,16 +1,36 @@
 import React from 'react';
 import Dialog from './Dialog/Dialog';
 import Classes from './Dialogs.module.css';
-import Message from './Message/Message'
-import MessageForm from './MessageForm/MessageForm';
 import { useEffect, useState } from 'react';
 import { Input } from '@mui/material';
+import { Route, Routes } from 'react-router-dom';
+import Messages from './Messages/Messages';
 
 
 
 
 const Dialogs = (props) => {
+    return (
+        <div className={Classes.wrapper}>
+            <Routes>
+                <Route path='/' element={<DialogList {...props}
+                />} />
+                <Route path=':id' element={<Messages
+                    getAllDialogsThunk={props.getAllDialogsThunk}
+                    ownerId={props.ownerId}
+                    ownerPhoto={props.ownerPhoto}
+                    dialogsPage={props.dialogsPage}
+                    getMessagesThunk={props.getMessagesThunk}
+                    sendMessageThunk={props.sendMessageThunk} />} />
+            </Routes>
+        </div>
+    );
+};
 
+
+export default Dialogs;
+
+const DialogList = (props) => {
     let [inputValue, setInputValue] = useState('')
     let [chatId, setChatId] = useState('')
 
@@ -26,44 +46,21 @@ const Dialogs = (props) => {
         props.startChatThunk(inputValue)
     }
 
-
-
-
     let dialogsElements = props.dialogsPage.dialogs.map(dialog => {
-        return <Dialog
-            name={dialog.userName}
+        return ((<Dialog
             key={dialog.id}
-            path={dialog.id}
+            dialog={dialog}
             getMessagesThunk={props.getMessagesThunk}
-        />
+        />))
     })
-    let messagesElements = props.dialogsPage.messages.map(message => {
-        return <Message message={message.body} key={message.id} />
-    })
-
     return (
         <div className={Classes.dialogs}>
             <div className={Classes.dialogItems}>
-
-                <Input label="Введите id" variant="filled"
+                <Input placeholder={"Введите id пользователя"} label="Введите id" color={'primary'} variant="filled"
                     onBlur={onBlurInput}
-                    onChange={onChangeInput}
-                />
+                    onChange={onChangeInput} />
                 {dialogsElements}
-
-
-
-            </div>
-            <div className={Classes.messages}>
-                {messagesElements}
-                <MessageForm user={props.params.id} sendMessage={props.sendMessageThunk} />
             </div>
         </div>
-    );
-};
-
-
-export default Dialogs;
-
-
-
+    )
+}

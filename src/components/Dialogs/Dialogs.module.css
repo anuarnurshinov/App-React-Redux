@@ -1,6 +1,8 @@
+.wrapper {
+  padding: 2em;
+}
+
 .dialogs {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
   min-height: 80vh;
 }
 .dialogItems {

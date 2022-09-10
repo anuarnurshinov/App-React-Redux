@@ -1,18 +1,11 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import { styled, useTheme } from '@mui/material';
+import { Box, List, CssBaseline, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, } from '@mui/material'
+
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ForumIcon from '@mui/icons-material/Forum';
 import FeedIcon from '@mui/icons-material/Feed';
@@ -129,7 +122,7 @@ export default function Menu() {
 const MenuItems = (props) => {
     return (
         <List>
-            {[['Профиль', `/profile`], ['Сообщения', '/dialogs'], ['Новости', '/news'], ['Музыка', '/music'], ['Настройки', '/settings'], ['Пользователи', '/users'],].map((text, index) => (
+            {[['Профиль', `/profile`], ['Сообщения', '/dialogs'], ['Пользователи', '/users'],].map((text, index) => (
                 <ListItem className={Classes.item} key={text} disablePadding sx={{ display: 'block' }}>
                     <NavLink className={isActive} to={`${text[1]}`}>
                         <ListItemButton

@@ -1,27 +1,35 @@
+.wrapper {
+  padding: 2em;
+}
 .avatar {
   width: auto;
   height: 50px;
   border-radius: 100%;
 }
-
+.userItem {
+  margin-top: 0.2em;
+}
+.pagination {
+  margin: 1em;
+}
 .selectedPage {
   font-weight: bold;
   color: gold;
   list-style-type: none;
   display: inline;
 }
-.currentPage:hover{
+.currentPage:hover {
   cursor: pointer;
 }
-.selectedPage:hover{
+.selectedPage:hover {
   cursor: pointer;
 }
-.currentPage{
+.currentPage {
   display: inline-block;
   list-style-type: none;
   margin: 2px;
 }
-.galleryContainer{
+.galleryContainer {
   margin: 20px;
   width: 200px;
   height: 20px;
@@ -29,11 +37,10 @@
   overflow-y: hidden;
   text-overflow: ellipsis;
 }
-.gallery{
+.gallery {
   overflow: auto;
   display: inline-block;
 }
-
 
 .pageListBlock {
   display: flex;
