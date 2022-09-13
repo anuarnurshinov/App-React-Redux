@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { deleteAuthorizedThunkCreator } from '../../../redux/auth/authReducer';
+import { deleteAuthorizedThunkCreator } from '../../../redux/auth/authReducer.ts';
 import { getSmallPhotoThunkCreator } from './../../../redux/menu/menuReducer';
 
 class HeaderContainer extends React.Component {

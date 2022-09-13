@@ -4,8 +4,8 @@ import { profileReducer } from './profile/profileReducer';
 import { dialogsReducer } from './dialogs/dialogsReducer';
 import { sidebarReducer } from './sidebar/sidebarReducer';
 import { usersReducers } from './users/usersReducer';
-import { authReducer } from './auth/authReducer';
-import { appReducer } from './app/appReducer';
+import { authReducer } from './auth/authReducer.ts';
+import { appReducer } from './app/appReducer.ts';
 import { menuReducer } from './menu/menuReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

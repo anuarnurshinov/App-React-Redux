@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Login from './Login';
-import { getAuthorizedThunkCreator } from '../../redux/auth/authReducer';
+import { getAuthorizedThunkCreator } from '../../redux/auth/authReducer.ts';
 import { compose } from 'redux';
 import { successfulLoginRedirect } from '../../hoc/withAuthRedirect'
 
